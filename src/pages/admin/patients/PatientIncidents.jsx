@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Paper, Table, TableBody, TableCell, TableContainer, TableHead,
-  TablePagination, TableRow, Typography, Box, IconButton, Button, Dialog, DialogTitle
+  TablePagination, TableRow, Typography, Box, IconButton, Button, Dialog, DialogTitle, DialogContent
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -184,13 +184,15 @@ export default function PatientIncidents() {
         />
       </Paper>
 
-      <Dialog open={dialogOpen} onClose={handleCloseDialog} maxWidth="md" fullWidth>
+      <Dialog open={dialogOpen} onClose={handleCloseDialog} fullWidth>
         <DialogTitle>{selectedIncident ? 'Edit Incident' : 'Add Incident'}</DialogTitle>
+        <DialogContent>
         <IncidentForm
           initialValues={selectedIncident}
           onSubmit={handleFormSubmit}
           onCancel={handleCloseDialog}
         />
+        </DialogContent>
       </Dialog>
     </Box>
   );

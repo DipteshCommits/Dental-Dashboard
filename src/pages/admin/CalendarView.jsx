@@ -5,17 +5,22 @@ import {
   Paper,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  Divider,
+  Chip,
+  Stack
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { useNavigate } from 'react-router-dom';
 
 const CalendarView = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [appointments, setAppointments] = useState([]);
   const [patients, setPatients] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const allIncidents = JSON.parse(localStorage.getItem('incidents')) || [];
@@ -57,21 +62,45 @@ const CalendarView = () => {
 
           <List>
             {getAppointmentsForSelectedDate().length === 0 && (
-              <Typography>No appointments.</Typography>
+              <ListItem>
+                <ListItemText primary={<Typography>No appointments.</Typography>} />
+              </ListItem>
             )}
 
+            {/*http://localhost:5173/admin/patients/p1/incident*/}
             {getAppointmentsForSelectedDate().map((item) => (
-              <ListItem key={item.id} divider>
-                <ListItemText
-                  primary={item.title}
-                  secondary={
-                    <>
-                      {getPatientName(item.patientId)} —{' '}
-                      {dayjs(item.appointmentDate).format('hh:mm A')}
-                    </>
-                  }
-                />
-              </ListItem>
+              <React.Fragment key={item.id}>
+                <ListItem
+                  divider
+                  button="true"
+                  onClick={() => navigate(`/admin/patients/${item.patientId}/incidents`)}
+                >
+                
+                  <ListItemText
+                    primary={
+                      <Box component="span">
+                        <strong>{item.title}</strong>{' '}
+                        <Typography component="span" variant="body2" color="text.secondary">
+                          ({getPatientName(item.patientId)})
+                        </Typography>
+                      </Box>
+                    }
+                    secondary={
+                      <Stack direction="row" alignItems="center" spacing={1}>
+                        <Typography component="span">
+                          {dayjs(item.appointmentDate).format('hh:mm A')}
+                        </Typography>
+                        <Chip
+                          label={item.status || 'Pending'}
+                          size="small"
+                          color={item.status === 'Completed' ? 'success' : item.status === 'Ongoing' ? 'warning' : 'default'}
+                        />
+                      </Stack>
+                    }
+                  />
+                </ListItem>
+                <Divider />
+              </React.Fragment>
             ))}
           </List>
         </Box>
