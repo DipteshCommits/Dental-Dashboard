@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 import PatientList from './patients/PatientList';
 import PatientIncidents from './patients/PatientIncidents';
 import CalendarView from './CalendarView';
-// Other imports (Appointments, Calendar, etc.) later
+
 
 const AdminDashboard = () => {
     return (
@@ -16,7 +16,6 @@ const AdminDashboard = () => {
                 <Route path="/patients/:patientId/incidents" element={<PatientIncidents />} />
                 <Route path="calendar" element={<CalendarView/>} />
 
-                {/* Add other routes like appointments, calendar etc. */}
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </AdminLayout>

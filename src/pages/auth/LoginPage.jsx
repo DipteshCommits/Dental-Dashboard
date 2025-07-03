@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   const redirectToDashboard = (role) => {
     if (role === 'Admin') navigate('/admin');
-    else if (role === 'Patient') navigate('/patient');
+    else if (role === 'Patient') navigate('/patients');
   };
 
   const handleLogin = () => {
