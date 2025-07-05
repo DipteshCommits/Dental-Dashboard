@@ -5,19 +5,13 @@ import Dashboard from './Dashboard';
 import PatientList from './patients/PatientList';
 import PatientIncidents from './patients/PatientIncidents';
 import CalendarView from './CalendarView';
+import {Outlet} from 'react-router-dom'
 
 
 const AdminDashboard = () => {
     return (
         <AdminLayout>
-            <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/patients" element={<PatientList />} />
-                <Route path="/patients/:patientId/incidents" element={<PatientIncidents />} />
-                <Route path="calendar" element={<CalendarView/>} />
-
-                <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
+            <Outlet/>
         </AdminLayout>
     );
 };

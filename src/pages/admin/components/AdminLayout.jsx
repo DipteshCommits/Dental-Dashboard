@@ -118,7 +118,6 @@ const AdminLayout = ({ children }) => {
     {
         text:'Calendar', icon: <CalendarMonth/>, path: '/admin/calendar'
     }
-    // Add more routes here like Appointments, Calendar, etc.
   ];
 
   return (
