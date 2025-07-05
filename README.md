@@ -5,7 +5,7 @@ A responsive and role-based dental clinic management system built using React an
 ---
 
 ## 🔗 Deployed App Link
-(https://dental-dashboard-git-main-dipteshcommits-projects.vercel.app)
+https://dental-dashboard-git-main-dipteshcommits-projects.vercel.app
 
 ---
 
